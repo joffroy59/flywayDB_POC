@@ -57,6 +57,16 @@
 			</properties>
 		</profile>
 
+		<profile>
+			<id>onlyCurrentVersion</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<flyway.locations>filesystem:./sql/${project.version}</flyway.locations>
+			</properties>
+		</profile>
+
 	</profiles>
 
 	<build>
