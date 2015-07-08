@@ -1,0 +1,5 @@
+INSERT INTO "ANIMALS" ("NAME", "TYPE") VALUES ('King of king2 1.0.0', 'lion');
+INSERT INTO "ANIMALS" ("NAME", "TYPE") VALUES ('ourazi2 1.0.0', 'horse');
+
+INSERT INTO "PERSONS" ("NAME", "AGE") VALUES ('Daniel2 1.0.0', 21);
+INSERT INTO "PERSONS" ("NAME", "AGE") VALUES ('Emile2 1.0.0', 31);
