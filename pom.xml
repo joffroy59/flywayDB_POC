@@ -11,11 +11,53 @@
 		<flyway.user>mypguser</flyway.user>
 		<flyway.password>mypguser</flyway.password>
 
-		<!-- List are defined as comma-separated values -->
-		<flyway.schemas>public</flyway.schemas>
 		<flyway.locations>filesystem:./sql</flyway.locations>
 		<flyway.baselineOnMigrate>true</flyway.baselineOnMigrate>
 	</properties>
+
+	<profiles>
+
+		<profile>
+			<id>postgresql</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<flyway.extended.db.url>jdbc:postgresql://localhost:6432/mypgdatabase</flyway.extended.db.url>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>org.postgresql</groupId>
+					<artifactId>postgresql</artifactId>
+					<version>9.3-1102-jdbc4</version>
+				</dependency>
+			</dependencies>
+
+		</profile>
+
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- List are defined as comma-separated values -->
+				<flyway.schemas>public</flyway.schemas>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>run</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<!-- List are defined as comma-separated values -->
+				<flyway.schemas>testSchema1</flyway.schemas>
+			</properties>
+		</profile>
+
+	</profiles>
 
 	<build>
 		<plugins>
@@ -24,15 +66,8 @@
 				<artifactId>flyway-maven-plugin</artifactId>
 				<version>3.2.1</version>
 				<configuration>
-					<url>jdbc:postgresql://localhost:6432/mypgdatabase</url>
+					<url>${flyway.extended.db.url}</url>
 				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.postgresql</groupId>
-						<artifactId>postgresql</artifactId>
-						<version>9.3-1102-jdbc4</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
